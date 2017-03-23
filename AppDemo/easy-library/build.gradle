@@ -28,4 +28,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
+    //注释依赖库
+    compile 'com.jakewharton:butterknife:7.0.1'
+    //沉浸式通知栏
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
 }

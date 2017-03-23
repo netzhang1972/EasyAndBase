@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="clearButtonEditTextAttr" format="fraction" />
+    <declare-styleable name="ClearButtonEditText">
+        <attr name="DrawableLeftSize" format="dimension" />
+        <attr name="DrawableRightSize" format="dimension"/>
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingRight" />
+        <attr name="android:background" />
+        <attr name="android:hint" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:textColorHint" />
+        <attr name="android:drawablePadding" />
+        <attr name="android:editable" />
+        <attr name="android:text" />
+        <attr name="android:focusableInTouchMode" />
+        <attr name="android:maxLines" />
+    </declare-styleable>
+    <!--标题栏-->
+    <attr name="titleBarAttr" format="fraction" />
+    <declare-styleable name="TitleBarView">
+        <!--标题背景-->
+        <attr name="android:background" />
+        <attr name="titleBarHeight" format="dimension" />
+        <!--标题文字颜色-->
+        <attr name="titleTextColor" format="color" />
+        <!--标题文字大小-->
+        <attr name="titleTextSize" format="dimension" />
+        <!--副标题文字颜色-->
+        <attr name="subtitleTextColor" format="color" />
+        <!--副标题文字大小-->
+        <attr name="subtitleTextSize" format="dimension" />
+        <!--手机顶部状态栏颜色-->
+        <attr name="statusBarColor" format="color" />
+        <!--手机底部功能栏颜色-->
+        <attr name="functionBarColor" format="color" />
+        <!--固定图标大小-->
+        <attr name="iconSize" format="dimension" />
+    </declare-styleable>
+</resources>

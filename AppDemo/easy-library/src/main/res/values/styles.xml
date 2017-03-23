@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Easy">
+    </style>
+    <style name="Easy.TitleBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="titleBarAttr">@style/Easy.TitleBarStyle</item>
+        <item name="clearButtonEditTextAttr">@style/Easy.ClearButtonEditText</item>
+    </style>
+    <style name="Easy.ClearButtonEditText" parent="Easy">
+        <item name="DrawableLeftSize">20dp</item>
+        <item name="DrawableRightSize">20dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/easy_black</item>
+        <item name="android:textColorHint">@color/easy_light_gray</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:editable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="hint"
+    </style>
+    <!--标题栏-->
+    <style name="Easy.TitleBarStyle" parent="Easy">
+        <!--标题栏背景-->
+        <item name="android:background">@color/easy_red</item>
+        <!--标题栏高度-->
+        <item name="titleBarHeight">48dp</item>
+        <!--标题文字颜色-->
+        <item name="titleTextColor">@color/easy_white</item>
+        <!--标题文字大小-->
+        <item name="titleTextSize">18px</item>
+        <!--副标题文字颜色-->
+        <item name="subtitleTextColor">@color/easy_white</item>
+        <!--副标题文字大小-->
+        <item name="subtitleTextSize">12px</item>
+        <!--固定图标大小-->
+        <item name="iconSize">30dp</item>
+        <!--&lt;!&ndash;手机顶部状态栏颜色&ndash;&gt;-->
+        <!--<item name="statusBarColor"></item>-->
+        <!--&lt;!&ndash;手机底部功能栏颜色&ndash;&gt;-->
+        <!--<item name="functionBarColor"></item>-->
+    </style>
+</resources>
