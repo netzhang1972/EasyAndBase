@@ -37,5 +37,13 @@
         <attr name="functionBarColor" format="color" />
         <!--固定图标大小-->
         <attr name="iconSize" format="dimension" />
+        <!--描述文字大小-->
+        <attr name="descriptionTextSize" format="dimension"/>
+        <!--描述文字颜色-->
+        <attr name="descriptionTextColor" format="color"/>
+        <!--两侧Padding-->
+        <attr name="bothSidesPadding" format="dimension"/>
+        <!--图标按下时的背景颜色-->
+        <attr name="iconPressedBackgroundColor" format="color"/>
     </declare-styleable>
 </resources>

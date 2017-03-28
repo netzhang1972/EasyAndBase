@@ -2,7 +2,11 @@ package com.easy.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,6 +20,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
 import com.easy.R;
+import com.easy.toolbox.Tools;
 
 
 /**
@@ -42,6 +47,7 @@ public class ClearButtonEditText extends EditText implements OnFocusChangeListen
     private int drawableRightSize;
     private int paddingLeft;
     private int paddingRight;
+
     public ClearButtonEditText(Context context) {
         this(context, null);
     }
@@ -80,6 +86,7 @@ public class ClearButtonEditText extends EditText implements OnFocusChangeListen
         setOnFocusChangeListener(this);
         // 设置输入框里面内容发生改变的监听
         addTextChangedListener(this);
+
     }
     /**
      * 因为我们不能直接给EditText设置点击事件，所以我们用记住我们按下的位置来模拟点击事件 当我们按下的位置 在 EditText的宽度 -
@@ -166,5 +173,10 @@ public class ClearButtonEditText extends EditText implements OnFocusChangeListen
         translateAnimation.setDuration(1000);
         return translateAnimation;
     }
-
+    private GradientDrawable getLineBackground(int color){
+        GradientDrawable gradientDrawable = new GradientDrawable();
+        gradientDrawable.setSize(getMeasuredWidth(),Tools.Int2dp(getContext(),1));
+        gradientDrawable.setColor(color);
+        return gradientDrawable;
+    }
 }
