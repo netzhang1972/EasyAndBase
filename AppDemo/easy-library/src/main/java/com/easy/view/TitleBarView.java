@@ -6,13 +6,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -35,23 +38,22 @@ public class TitleBarView extends RelativeLayout {
     private LinearLayout mRightRegion;
     //中间区域
     private LinearLayout mCoreRegion;
-    //固定图标大小
-    private int mIconSize;
+    //固定左边图标大小
+    private int mIconLeftSize;
+    //固定右边图标大小
+    private int mIconRightSize;
     //描述文字大小
     private int mDescriptionTextSize;
-    //描述文字颜色
-    private int mDescriptionTextColor;
     //图标按下时的背景颜色
     private int mIconPressedBackgroundColor ;
-    //标题颜色
-    private int mTitleTextColor;
+    //文字颜色
+    private int mTextColor;
     //标题文字大小
     private int mTitleTextSize;
     //副标题色
     private int mSubtitleTextSize;
-    //副标题文字大小
-    private int mSubtitleTextColor;
 
+    private int titleBarHeight;
     public TitleBarView(Context context) {
         this(context,null);
     }
@@ -70,15 +72,15 @@ public class TitleBarView extends RelativeLayout {
         initWindow();
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TitleBarView, defStyleAttr, R.style.Easy_TitleBarStyle);
-        mTitleTextColor = a.getColor(R.styleable.TitleBarView_titleTextColor,mTitleTextColor);
+        mTextColor = a.getColor(R.styleable.TitleBarView_android_textColor,mTextColor);
         mTitleTextSize = a.getDimensionPixelSize(R.styleable.TitleBarView_titleTextSize,mTitleTextSize);
-        mSubtitleTextColor = a.getColor(R.styleable.TitleBarView_subtitleTextColor,mSubtitleTextColor);
         mSubtitleTextSize = a.getDimensionPixelSize(R.styleable.TitleBarView_subtitleTextSize,mSubtitleTextSize);
-        mIconSize = a.getDimensionPixelSize(R.styleable.TitleBarView_iconSize,mIconSize);
+        mIconLeftSize = a.getDimensionPixelSize(R.styleable.TitleBarView_iconLeftSize,mIconLeftSize);
+        mIconRightSize = a.getDimensionPixelSize(R.styleable.TitleBarView_iconRightSize,mIconRightSize);
         mDescriptionTextSize = a.getDimensionPixelSize(R.styleable.TitleBarView_descriptionTextSize,mDescriptionTextSize);
-        mDescriptionTextColor = a.getColor(R.styleable.TitleBarView_descriptionTextColor,mDescriptionTextColor);
         mIconPressedBackgroundColor = a.getColor(R.styleable.TitleBarView_iconPressedBackgroundColor,mIconPressedBackgroundColor);
-        int titleBarHeight = a.getDimensionPixelSize(R.styleable.TitleBarView_titleBarHeight,0);
+
+        titleBarHeight = a.getLayoutDimension(R.styleable.TitleBarView_android_layout_height,0);
         if(titleBarHeight != 0){
             this.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,titleBarHeight));
         }
@@ -146,108 +148,131 @@ public class TitleBarView extends RelativeLayout {
         if(!TextUtils.isEmpty(text)){
             mTitle = new TextView(getContext());
             mTitle.setTextSize(mTitleTextSize);
-            mTitle.setTextColor(mTitleTextColor);
+            mTitle.setTextColor(mTextColor);
             mTitle.setText(text);
             mCoreRegion.addView(mTitle,getTitleBarLayoutParams());
         }
         if(!TextUtils.isEmpty(SubtitleText)){
             mSubtitle = new TextView(getContext());
             mSubtitle.setTextSize(mSubtitleTextSize);
-            mSubtitle.setTextColor(mSubtitleTextColor);
+            mSubtitle.setTextColor(mTextColor);
             mSubtitle.setText(SubtitleText);
             mCoreRegion.addView(mSubtitle,getTitleBarLayoutParams());
         }
     }
 
-    //设置图标
-    public void setLeftIcon(Drawable drawable,OnClickListener listener){
-        setLeftIcon(drawable,null,listener);
-    }
-    //设置图标
-    public void setLeftText(CharSequence description,OnClickListener listener){
-        setLeftIcon(null,description,listener);
-    }
-    //设置图标
-    public void setLeftIcon(Drawable drawable,CharSequence description,OnClickListener listener){
+    /**
+     * 设置左边图标
+     * @param icon 图标
+     * @param background 背景
+     * @param listener 事件
+     */
+    public void setLeftIcon(Drawable icon,Drawable background,OnClickListener listener){
         mLeftRegion.removeAllViews();
-        ImageView mIconView = null;
-        TextView mDescription = null;
-        if(drawable != null){
-            mIconView = new ImageView(getContext());
-            mIconView.setImageDrawable(drawable);
+        if(icon != null){
+            ImageView mIconView = new ImageView(getContext());
+            mIconView.setImageDrawable(icon);
             mIconView.setLayoutParams(new LayoutParams(
-                    mIconSize,mIconSize
+                    mIconLeftSize,
+                    mIconLeftSize
             ));
+            mIconView.setBackground(background);
+            mIconView.setOnClickListener(listener);
             mLeftRegion.addView(mIconView);
         }
-        if (!TextUtils.isEmpty(description)){
-            mDescription = new TextView(getContext());
+    }
+    /**
+     * 设置左边文字
+     * @param description 描述
+     * @param background 背景
+     * @param listener 事件
+     */
+    public void setLeftText(Drawable icon,CharSequence description,Drawable background,OnClickListener listener){
+        mLeftRegion.removeAllViews();
+        if(!TextUtils.isEmpty(description)){
+            TextView mDescription = new TextView(getContext());
+            mDescription.setGravity(Gravity.CENTER_VERTICAL);
+            if(icon != null) {
+                icon.setBounds(0, 0, mIconLeftSize, mIconLeftSize);
+                mDescription.setCompoundDrawables(icon, null, null, null);
+            }
+            mDescription.setPadding(10,10,10,10);
             mDescription.setTextSize(mDescriptionTextSize);
-            mDescription.setTextColor(mDescriptionTextColor);
+            mDescription.setTextColor(mTextColor);
             mDescription.setText(description);
-            mLeftRegion.addView(mDescription,getTitleBarLayoutParams());
-        }
-        if(mIconView != null && mDescription != null){
-            mLeftRegion.setOnClickListener(listener);
-            mLeftRegion.setPadding(0,10,30,10);
-            mLeftRegion.setBackground(BackgroundHelper.RectBackground(
-                    getContext(), mIconPressedBackgroundColor,
-                  Tools.Int2px(getContext(),mIconSize),20f));
-        }else if (mIconView != null){
-            mIconView.setOnClickListener(listener);
-            mIconView.setBackground(BackgroundHelper.RoundBackground(
-                    getContext(),Tools.Int2px(getContext(),mIconSize),
-                    mIconPressedBackgroundColor));
-        }else if (mDescription != null){
             mDescription.setOnClickListener(listener);
-            mDescription.setPadding(30,15,30,15);
-            mDescription.setBackground(BackgroundHelper.RectBackground(
-                    getContext(), mIconPressedBackgroundColor,
-                    Tools.Int2px(getContext(),mIconSize),20f));
+            mDescription.setBackground(background);
+            mLeftRegion.addView(mDescription);
         }
     }
-    public void setRightIcon(Drawable drawable,OnClickListener listener){
+    /**
+     * 设置右边图标
+     * @param icon 图标
+     * @param background 背景
+     * @param listener 事件
+     */
+    public void setRightIcon(Drawable icon,Drawable background,OnClickListener listener){
         mRightRegion.removeAllViews();
-        if(drawable != null){
+        if(icon != null){
             ImageView mIconView = new ImageView(getContext());
-            mIconView.setImageDrawable(drawable);
+            mIconView.setImageDrawable(icon);
             mIconView.setVisibility(VISIBLE);
             mIconView.setLayoutParams(new LayoutParams(
-                    mIconSize,mIconSize
+                    mIconRightSize,mIconRightSize
             ));
-            mIconView.setBackground(BackgroundHelper.RoundBackground(
-                    getContext(),Tools.Int2px(getContext(),mIconSize),
-                    mIconPressedBackgroundColor));
+            mIconView.setBackground(background);
             mIconView.setOnClickListener(listener);
             mRightRegion.addView(mIconView);
         }
     }
-    public void setRightText(CharSequence description,OnClickListener listener){
+    /**
+     * 设置右边文字
+     * @param description 描述
+     * @param background 背景
+     * @param listener 事件
+     */
+    public void setRightText(CharSequence description,Drawable background,OnClickListener listener){
+        setRightText(null,description,background,listener);
+    }
+
+    /**
+     * 设置右边文字
+     * @param icon 图标
+     * @param description 描述
+     * @param background 背景
+     * @param listener 事件
+     */
+    public void setRightText(Drawable icon,CharSequence description,Drawable background,OnClickListener listener){
         mRightRegion.removeAllViews();
         if(!TextUtils.isEmpty(description)){
             TextView mDescription = new TextView(getContext());
+            mDescription.setGravity(Gravity.CENTER_VERTICAL);
+            if(icon != null) {
+                icon.setBounds(0, 0, mIconLeftSize, mIconLeftSize);
+                mDescription.setCompoundDrawables(null,null,icon,null);
+            }
             mDescription.setPadding(30,15,30,15);
             mDescription.setTextSize(mDescriptionTextSize);
-            mDescription.setTextColor(mDescriptionTextColor);
+            mDescription.setTextColor(mTextColor);
             mDescription.setText(description);
             mDescription.setOnClickListener(listener);
-            mDescription.setBackground(BackgroundHelper.RectBackground(
-                    getContext(), mIconPressedBackgroundColor,
-                    Tools.Int2px(getContext(),mIconSize),20f));
             mRightRegion.addView(mDescription);
         }
     }
-    public void setCoreRegionViews(View child){
+    public void setCoreRegionViews(setViewLayout child){
+        if(child == null)return;
         mCoreRegion.removeAllViews();
-        mCoreRegion.addView(child);
+        mCoreRegion.addView(child.setViews());
     }
-    public void setLeftRegionViews(View child){
+    public void setLeftRegionViews(setViewLayout child){
+        if(child == null)return;
         mLeftRegion.removeAllViews();
-        mLeftRegion.addView(child);
+        mLeftRegion.addView(child.setViews());
     }
-    public void setRightRegionViews(View child){
+    public void setRightRegionViews(setViewLayout child){
+        if(child == null)return;
         mRightRegion.removeAllViews();
-        mRightRegion.addView(child);
+        mRightRegion.addView(child.setViews());
     }
     //-------------------------------------------------------------
     //处理状态背景
@@ -274,5 +299,11 @@ public class TitleBarView extends RelativeLayout {
     public void setNavigationBarTintColor(int color){
         mTintManager.setNavigationBarTintColor(color);
     }
+
+
+
     //-------------------------------------------------------------
+    public interface setViewLayout{
+        public View setViews();
+    }
 }

@@ -2,11 +2,7 @@
 <resources>
     <style name="Easy">
     </style>
-    <style name="Easy.TitleBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="titleBarAttr">@style/Easy.TitleBarStyle</item>
-        <item name="clearButtonEditTextAttr">@style/Easy.ClearButtonEditText</item>
-    </style>
+
     <style name="Easy.ClearButtonEditText" parent="Easy">
         <item name="DrawableLeftSize">20dp</item>
         <item name="DrawableRightSize">20dp</item>
@@ -26,21 +22,19 @@
         <!--标题栏背景-->
         <item name="android:background">@color/easy_red</item>
         <!--标题栏高度-->
-        <item name="titleBarHeight">48dp</item>
+        <item name="android:layout_height">48dp</item>
         <!--标题文字颜色-->
-        <item name="titleTextColor">@color/easy_white</item>
+        <item name="android:textColor">@color/easy_black</item>
         <!--标题文字大小-->
         <item name="titleTextSize">18px</item>
-        <!--副标题文字颜色-->
-        <item name="subtitleTextColor">@color/easy_white</item>
         <!--副标题文字大小-->
         <item name="subtitleTextSize">12px</item>
         <!--固定图标大小-->
-        <item name="iconSize">30dp</item>
+        <item name="iconLeftSize">30dp</item>
+        <!--固定图标大小-->
+        <item name="iconRightSize">30dp</item>
         <!--描述文字大小-->
         <item name="descriptionTextSize">16px</item>
-        <!--描述文字颜色-->
-        <item name="descriptionTextColor">@color/easy_white</item>
         <!--图标按下时的背景颜色-->
         <item name="iconPressedBackgroundColor">@color/easy_black</item>
         <item name="android:paddingLeft">8dp</item>

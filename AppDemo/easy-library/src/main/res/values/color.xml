@@ -3,6 +3,7 @@
 
     <color name="easy_black">#000</color>
     <color name="easy_light_gray">#c9c9c9</color>
+    <color name="easy_line_gray">#b7b6b6</color>
     <color name="easy_white">#ffffff</color>
     <color name="easy_red">#f15449</color>
 </resources>

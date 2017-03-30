@@ -9,6 +9,7 @@ import com.easy.toolbox.Tools;
 import com.easy.view.TitleBarView;
 
 /**
+ * 背景助手类
  * Created by Administrator on 2017/3/27.
  */
 
@@ -18,6 +19,7 @@ public class BackgroundHelper {
     public BackgroundHelper(Context context,int shape){
         mContext = context;
         gradientDrawable = new GradientDrawable();
+        gradientDrawable.setBounds(50,50,50,50);
         gradientDrawable.setShape(shape);
         gradientDrawable.setUseLevel(false);
     }
@@ -44,8 +46,10 @@ public class BackgroundHelper {
     //圆角
     public BackgroundHelper setCornersRadius(float[] radii){
         gradientDrawable.setCornerRadii(radii);
+
         return this;
     }
+
     public GradientDrawable create(){
         return gradientDrawable;
     }
@@ -62,7 +66,7 @@ public class BackgroundHelper {
                 .create();
         Drawable pressedDraw = new BackgroundHelper(context, GradientDrawable.RECTANGLE)
                 .setSolidColor(color)
-                .setSize(size,size)
+                .setSize(size,size+10)
                 .setCornersRadius(f)
                 .create();
         pressedDraw.setAlpha(50);
@@ -76,11 +80,13 @@ public class BackgroundHelper {
      * @return
      */
     public static Drawable RoundBackground(Context context,int size,int color){
+        int sizes = Tools.Int2dp(context,50);
         Drawable normalDraw = new BackgroundHelper(context, GradientDrawable.OVAL)
                 .create();
         Drawable pressedDraw = new BackgroundHelper(context, GradientDrawable.OVAL)
-                .setSize(size,size)
+                .setSize(sizes,sizes)
                 .setSolidColor(color)
+
                 .create();
         pressedDraw.setAlpha(50);
         return getSelector(normalDraw,pressedDraw);

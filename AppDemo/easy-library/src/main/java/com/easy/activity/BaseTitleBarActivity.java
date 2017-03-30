@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -32,6 +33,7 @@ public abstract class BaseTitleBarActivity extends AppCompatActivity {
      * 内容布局
      */
     private RelativeLayout contentLayout = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +49,19 @@ public abstract class BaseTitleBarActivity extends AppCompatActivity {
 
         Total_layout.addView(mTitleBar);
 
+        View line = new View(this);
+        line.setId(R.id.titleBarLine);
+        line.setBackgroundColor(ContextCompat.getColor(this,R.color.easy_line_gray));
+        RelativeLayout.LayoutParams layoutParamsLine = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, 2
+        );
+        layoutParamsLine.addRule(RelativeLayout.BELOW,mTitleBar.getId());
+        Total_layout.addView(line, layoutParamsLine);
         RelativeLayout.LayoutParams layoutParamsContent = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT
         );
-        layoutParamsContent.addRule(RelativeLayout.BELOW,mTitleBar.getId());
+        layoutParamsContent.addRule(RelativeLayout.BELOW,line.getId());
         Total_layout.addView(contentLayout, layoutParamsContent);
         //设置ContentView
         setContentView(Total_layout,new RelativeLayout.LayoutParams(
