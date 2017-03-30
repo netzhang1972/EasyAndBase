@@ -5,9 +5,8 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_player_back_nor"
+
         android:layout_centerInParent="true"
         android:clickable="true"
-        android:background="@drawable/round_backgrund_default"
         />
 </RelativeLayout>

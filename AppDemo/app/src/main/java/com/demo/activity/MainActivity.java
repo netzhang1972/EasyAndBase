@@ -14,7 +14,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitleBarContentView(R.layout.test01);
+        setTitleBarContentView(R.layout.activity_main);
         getTitleBar().setTitle("首页");
 //        getTitleBar().setRightText(
 //                ContextCompat.getDrawable(this, R.drawable.btn_edit),
