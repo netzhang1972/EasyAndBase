@@ -32,4 +32,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     //沉浸式通知栏
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+    compile 'com.android.support:recyclerview-v7:25.2.0'
 }

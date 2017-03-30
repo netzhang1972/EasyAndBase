@@ -129,6 +129,12 @@ public class TitleBarView extends RelativeLayout {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
     }
+    public void removeLeftIcon(){
+        mLeftRegion.removeAllViews();
+    }
+    public void removeRightRegion(){
+        mRightRegion.removeAllViews();
+    }
     /**
      * 标题
      */

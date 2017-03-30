@@ -24,9 +24,9 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:background">#FFFFFF</item>
         <item name="android:textColor">@color/colorText</item>
-        <item name="android:paddingLeft">4dp</item>
-        <item name="android:paddingRight">6dp</item>
-        <item name="iconLeftSize">25dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="iconLeftSize">30dp</item>
         <item name="iconRightSize">30dp</item>
     </style>
     <style name="clearButtonEditText" parent="Easy.ClearButtonEditText">

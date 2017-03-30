@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--选择器-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--项 = 按下状态-->
+    <item android:state_pressed="true" >
+        <!--形状 = 这里设置的是长方形-->
+        <shape android:shape="rectangle">
+            <!--实心的-->
+            <solid android:color="#cfd8dc"></solid>
+        </shape>
+    </item>
+</selector>

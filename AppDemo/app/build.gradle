@@ -27,4 +27,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.2.0'
     testCompile 'junit:junit:4.12'
     compile project(':easy-library')
+    //图片请求库
+    compile 'com.facebook.fresco:fresco:0.8.1'
 }
