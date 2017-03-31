@@ -25,6 +25,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitleBarContentView(R.layout.activity_main);
+
         getTitleBar().setTitle("首页");
         getTitleBar().removeLeftIcon();
         //创建线性LinearLayoutManager

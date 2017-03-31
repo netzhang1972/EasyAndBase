@@ -3,11 +3,13 @@ package com.easy.helper;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.ColorInt;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.view.View;
 
+import com.easy.R;
 import com.easy.view.TitleBarView;
 
 
@@ -21,9 +23,11 @@ public class LeftDrawerToggleHelper implements DrawerLayout.DrawerListener {
     public LeftDrawerToggleHelper(Context context, final DrawerLayout mDrawerLayout, TitleBarView view,int color) {
         if (mSlider == null) {
             mSlider = new TitleBarDrawerArrowDrawableToggle(context);
+            mSlider.setBounds(20,0,0,0);
             mSlider.setColor(color);
         }
-        view.setLeftIcon(mSlider, null, new View.OnClickListener() {
+        view.setLeftIcon(mSlider,
+               new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int drawerLockMode = mDrawerLayout.getDrawerLockMode(GravityCompat.START);

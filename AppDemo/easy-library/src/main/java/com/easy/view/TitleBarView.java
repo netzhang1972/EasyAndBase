@@ -97,7 +97,6 @@ public class TitleBarView extends RelativeLayout {
         initLayout();
     }
     private void initLayout(){
-        setPadding(getPaddingLeft(),getPaddingTop(),getPaddingRight(),getPaddingBottom());
         mCoreRegion = new LinearLayout(getContext());
         mCoreRegion.setGravity(Gravity.CENTER);
         mCoreRegion.setOrientation(LinearLayout.VERTICAL);
@@ -170,19 +169,19 @@ public class TitleBarView extends RelativeLayout {
     /**
      * 设置左边图标
      * @param icon 图标
-     * @param background 背景
      * @param listener 事件
      */
-    public void setLeftIcon(Drawable icon,Drawable background,OnClickListener listener){
+    public void setLeftIcon(Drawable icon,OnClickListener listener){
         mLeftRegion.removeAllViews();
         if(icon != null){
             ImageView mIconView = new ImageView(getContext());
+            icon.setBounds(0,0,mIconLeftSize,mIconLeftSize);
             mIconView.setImageDrawable(icon);
             mIconView.setLayoutParams(new LayoutParams(
                     mIconLeftSize,
                     mIconLeftSize
             ));
-            mIconView.setBackground(background);
+            mIconView.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.icon_background));
             mIconView.setOnClickListener(listener);
             mLeftRegion.addView(mIconView);
         }
@@ -214,10 +213,9 @@ public class TitleBarView extends RelativeLayout {
     /**
      * 设置右边图标
      * @param icon 图标
-     * @param background 背景
      * @param listener 事件
      */
-    public void setRightIcon(Drawable icon,Drawable background,OnClickListener listener){
+    public void setRightIcon(Drawable icon,OnClickListener listener){
         mRightRegion.removeAllViews();
         if(icon != null){
             ImageView mIconView = new ImageView(getContext());
@@ -226,7 +224,7 @@ public class TitleBarView extends RelativeLayout {
             mIconView.setLayoutParams(new LayoutParams(
                     mIconRightSize,mIconRightSize
             ));
-            mIconView.setBackground(background);
+            mIconView.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.icon_background));
             mIconView.setOnClickListener(listener);
             mRightRegion.addView(mIconView);
         }

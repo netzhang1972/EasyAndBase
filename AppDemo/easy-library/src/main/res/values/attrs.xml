@@ -20,6 +20,7 @@
     <!--标题栏-->
     <attr name="titleBarAttr" format="fraction" />
     <declare-styleable name="TitleBarView">
+        <attr name="android:layout_marginLeft"/>
         <!--标题背景-->
         <attr name="android:background" />
         <!--标题高度-->
