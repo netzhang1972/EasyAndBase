@@ -7,10 +7,10 @@
             <!--实心-->
             <solid android:color="#d9d7d7" />
             <padding
-                android:left="2dp"
-                android:top="2dp"
-                android:right="2dp"
-                android:bottom="2dp" />
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp" />
             <size android:width="15dp"
                 android:height="15dp" />
         </shape>
@@ -20,10 +20,10 @@
             android:shape="oval"
             android:useLevel="false">
             <padding
-                android:left="2dp"
-                android:top="2dp"
-                android:right="2dp"
-                android:bottom="2dp" />
+                android:left="5dp"
+                android:top="5dp"
+                android:right="5dp"
+                android:bottom="5dp" />
             <size android:width="15dp"
                 android:height="15dp" />
         </shape>

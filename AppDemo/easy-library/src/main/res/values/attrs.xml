@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <attr name="returnArrowDrawableAttr" format="fraction"/>
+    <declare-styleable name="ReturnArrowDrawable">
+        <attr name="lineColor" format="color"/>
+        <attr name="lineWidth" format="dimension"/>
+    </declare-styleable>
     <attr name="clearButtonEditTextAttr" format="fraction" />
     <declare-styleable name="ClearButtonEditText">
         <attr name="DrawableLeftSize" format="dimension" />

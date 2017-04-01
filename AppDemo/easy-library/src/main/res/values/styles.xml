@@ -2,7 +2,10 @@
 <resources>
     <style name="Easy">
     </style>
-
+    <style name="Easy.ReturnArrowDrawableStyle" parent="Easy">
+        <item name="lineColor">#6c6c6c</item>
+        <item name="lineWidth">2dp</item>
+    </style>
     <style name="Easy.ClearButtonEditText" parent="Easy">
         <item name="DrawableLeftSize">20dp</item>
         <item name="DrawableRightSize">20dp</item>

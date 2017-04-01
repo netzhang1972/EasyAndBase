@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.easy.R;
 import com.easy.helper.BackgroundHelper;
 import com.easy.toolbox.Tools;
+import com.easy.view.drawable.ReturnArrowDrawable;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
@@ -52,7 +53,7 @@ public class TitleBarView extends RelativeLayout {
     private int mTitleTextSize;
     //副标题色
     private int mSubtitleTextSize;
-
+    //标题栏高度
     private int titleBarHeight;
     public TitleBarView(Context context) {
         this(context,null);
@@ -95,6 +96,7 @@ public class TitleBarView extends RelativeLayout {
         }
         a.recycle();
         initLayout();
+        addReturnButton();
     }
     private void initLayout(){
         mCoreRegion = new LinearLayout(getContext());
@@ -122,14 +124,24 @@ public class TitleBarView extends RelativeLayout {
         mRightLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
         this.addView(mRightRegion,mRightLayoutParams);
     }
+    private void addReturnButton(){
+        ReturnArrowDrawable arrow = new ReturnArrowDrawable(getContext());
+        arrow.setColor(mTextColor);
+        setLeftIcon(arrow);
+        //setLeftIconBackground(BackgroundHelper.RoundBackground(getContext(),mIconLeftSize,mIconPressedBackgroundColor));
+        setLeftIconOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mActivity.finish();
+            }
+        });
+        setLeftIconPadding(15,15,15,15);
+    }
     private RelativeLayout.LayoutParams getTitleBarLayoutParams(){
         return new LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
-    }
-    public void removeLeftIcon(){
-        mLeftRegion.removeAllViews();
     }
     public void removeRightRegion(){
         mRightRegion.removeAllViews();
@@ -165,25 +177,61 @@ public class TitleBarView extends RelativeLayout {
             mCoreRegion.addView(mSubtitle,getTitleBarLayoutParams());
         }
     }
+    private ImageView mLeftIcon;
 
     /**
      * 设置左边图标
-     * @param icon 图标
-     * @param listener 事件
+     * @param icon
      */
-    public void setLeftIcon(Drawable icon,OnClickListener listener){
+    public void setLeftIcon(Drawable icon){
         mLeftRegion.removeAllViews();
-        if(icon != null){
-            ImageView mIconView = new ImageView(getContext());
-            icon.setBounds(0,0,mIconLeftSize,mIconLeftSize);
-            mIconView.setImageDrawable(icon);
-            mIconView.setLayoutParams(new LayoutParams(
-                    mIconLeftSize,
-                    mIconLeftSize
-            ));
-            mIconView.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.icon_background));
-            mIconView.setOnClickListener(listener);
-            mLeftRegion.addView(mIconView);
+        if (icon == null)return;
+        if (mLeftIcon == null){
+            mLeftIcon = new ImageView(getContext());
+        }
+        mLeftIcon.setImageDrawable(icon);
+        mLeftIcon.setLayoutParams(new LayoutParams(
+                mIconLeftSize,
+                mIconLeftSize
+        ));
+        mLeftIcon.setBackground(BackgroundHelper.RoundBackground(getContext(),mIconLeftSize,mIconPressedBackgroundColor));
+        mLeftRegion.addView(mLeftIcon);
+    }
+
+    /**
+     * 设置左边图标填充
+     * @param left
+     * @param top
+     * @param right
+     * @param bottom
+     */
+    public void setLeftIconPadding(int left, int top, int right, int bottom){
+        mLeftIcon.setPadding(left,top,right,bottom);
+    }
+    /**
+     * 设置左边图标背景
+     * @param background
+     */
+    public void setLeftIconBackground(Drawable background){
+        if(mLeftIcon != null){
+            mLeftIcon.setBackground(background);
+        }
+    }
+    /**
+     * 设置左边图标事件
+     * @param listener
+     */
+    public void setLeftIconOnClickListener(OnClickListener listener){
+        if(mLeftIcon != null){
+            mLeftIcon.setOnClickListener(listener);
+        }
+    }
+    public void setLeftIconLayoutParams(int width,int height){
+        if(mLeftIcon != null){
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mLeftIcon.getLayoutParams();
+            lp.width = width;
+            lp.height = height;
+            mLeftIcon.setLayoutParams(lp);
         }
     }
     /**
@@ -201,7 +249,6 @@ public class TitleBarView extends RelativeLayout {
                 icon.setBounds(0, 0, mIconLeftSize, mIconLeftSize);
                 mDescription.setCompoundDrawables(icon, null, null, null);
             }
-            mDescription.setPadding(10,10,10,10);
             mDescription.setTextSize(mDescriptionTextSize);
             mDescription.setTextColor(mTextColor);
             mDescription.setText(description);
@@ -210,23 +257,58 @@ public class TitleBarView extends RelativeLayout {
             mLeftRegion.addView(mDescription);
         }
     }
+    private ImageView mRightIcon;
+
     /**
      * 设置右边图标
-     * @param icon 图标
-     * @param listener 事件
+     * @param icon
      */
-    public void setRightIcon(Drawable icon,OnClickListener listener){
+    public void setRightIcon(Drawable icon){
         mRightRegion.removeAllViews();
-        if(icon != null){
-            ImageView mIconView = new ImageView(getContext());
-            mIconView.setImageDrawable(icon);
-            mIconView.setVisibility(VISIBLE);
-            mIconView.setLayoutParams(new LayoutParams(
-                    mIconRightSize,mIconRightSize
-            ));
-            mIconView.setBackground(ContextCompat.getDrawable(getContext(),R.drawable.icon_background));
-            mIconView.setOnClickListener(listener);
-            mRightRegion.addView(mIconView);
+        if (icon == null)return;
+        if(mRightIcon == null){
+            mRightIcon = new ImageView(getContext());
+            mRightIcon.setPadding(5,5,5,5);
+        }
+        mRightIcon.setImageDrawable(icon);
+        mRightIcon.setLayoutParams(new LayoutParams(
+                mIconRightSize,mIconRightSize
+        ));
+        mRightIcon.setBackground(BackgroundHelper.RoundBackground(getContext(),mIconRightSize,mIconPressedBackgroundColor));
+        mRightRegion.addView(mRightIcon);
+    }
+
+    /**
+     * 设置右边图标背景
+     * @param background
+     */
+    public void setRightIconBackground(Drawable background){
+        if(mRightIcon != null){
+            mRightIcon.setBackground(background);
+        }
+    }
+
+    /**
+     * 设置右边图标事件
+     * @param listener
+     */
+    public void setRightIconOnClickListener(OnClickListener listener){
+        if(mRightIcon != null){
+            mRightIcon.setOnClickListener(listener);
+        }
+    }
+
+    /**
+     * 设置右边图大小
+     * @param width
+     * @param height
+     */
+    public void setRightIconLayoutParams(int width,int height){
+        if(mRightIcon != null){
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mRightIcon.getLayoutParams();
+            lp.width = width;
+            lp.height = height;
+            mRightIcon.setLayoutParams(lp);
         }
     }
     /**
@@ -277,6 +359,15 @@ public class TitleBarView extends RelativeLayout {
         if(child == null)return;
         mRightRegion.removeAllViews();
         mRightRegion.addView(child.setViews());
+    }
+    public int getIconPressedBackgroundColor(){
+        return mIconPressedBackgroundColor;
+    }
+    public int getIconLeftSize(){
+        return mIconLeftSize;
+    }
+    public int getTextColor(){
+        return mTextColor;
     }
     //-------------------------------------------------------------
     //处理状态背景

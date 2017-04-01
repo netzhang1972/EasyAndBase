@@ -46,7 +46,6 @@ public class BackgroundHelper {
     //圆角
     public BackgroundHelper setCornersRadius(float[] radii){
         gradientDrawable.setCornerRadii(radii);
-
         return this;
     }
 

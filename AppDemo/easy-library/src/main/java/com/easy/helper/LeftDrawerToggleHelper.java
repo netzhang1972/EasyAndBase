@@ -10,6 +10,7 @@ import android.support.v7.graphics.drawable.DrawerArrowDrawable;
 import android.view.View;
 
 import com.easy.R;
+import com.easy.toolbox.Tools;
 import com.easy.view.TitleBarView;
 
 
@@ -20,14 +21,14 @@ import com.easy.view.TitleBarView;
 public class LeftDrawerToggleHelper implements DrawerLayout.DrawerListener {
     TitleBarDrawerArrowDrawableToggle mSlider;
 
-    public LeftDrawerToggleHelper(Context context, final DrawerLayout mDrawerLayout, TitleBarView view,int color) {
+    public LeftDrawerToggleHelper(Context context, final DrawerLayout mDrawerLayout, TitleBarView view) {
         if (mSlider == null) {
             mSlider = new TitleBarDrawerArrowDrawableToggle(context);
-            mSlider.setBounds(20,0,0,0);
-            mSlider.setColor(color);
+            mSlider.setColor(view.getTextColor());
         }
-        view.setLeftIcon(mSlider,
-               new View.OnClickListener() {
+        view.setLeftIcon(mSlider);
+        view.setLeftIconLayoutParams(Tools.Int2dp(context,35),Tools.Int2dp(context,35));
+        view.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int drawerLockMode = mDrawerLayout.getDrawerLockMode(GravityCompat.START);
@@ -39,6 +40,7 @@ public class LeftDrawerToggleHelper implements DrawerLayout.DrawerListener {
                 }
             }
         });
+        view.setLeftIconBackground(BackgroundHelper.RoundBackground(context,view.getIconLeftSize(),view.getIconPressedBackgroundColor()));
     }
 
     class TitleBarDrawerArrowDrawableToggle extends DrawerArrowDrawable implements DrawerToggle {

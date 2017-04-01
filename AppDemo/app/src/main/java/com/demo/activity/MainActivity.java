@@ -3,6 +3,7 @@ package com.demo.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -27,7 +28,15 @@ public class MainActivity extends BaseActivity {
         setTitleBarContentView(R.layout.activity_main);
 
         getTitleBar().setTitle("首页");
-        getTitleBar().removeLeftIcon();
+//        getTitleBar().setLeftIcon(null);
+        getTitleBar().setRightIcon(ContextCompat.getDrawable(this,R.drawable.toolbar_saysomething_icon_nor));
+//        getTitleBar().
+        getTitleBar().setRightIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "右边图标事件", Toast.LENGTH_LONG).show();
+            }
+        });
         //创建线性LinearLayoutManager
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         //创建分割线

@@ -24,7 +24,6 @@ public class DrawerActivity extends BaseActivity{
         setTitleBarContentView(R.layout.activity_drawer);
         getTitleBar().setTitle("左边抽屉");
         mDrawerLayout.addDrawerListener(new LeftDrawerToggleHelper(
-                this,mDrawerLayout,getTitleBar(),
-                ContextCompat.getColor(this,R.color.colorText)));
+                this,mDrawerLayout,getTitleBar()));
     }
 }
